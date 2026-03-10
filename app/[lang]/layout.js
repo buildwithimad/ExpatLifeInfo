@@ -2,10 +2,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { notFound } from "next/navigation";
 
-export default function LangLayout({ children, params }) {
-  const { lang } = params;
+export default async function LangLayout({ children, params }) {
+  const { lang } = await params;
   const allowedLangs = ["en", "ar"];
-  
+
   if (!allowedLangs.includes(lang)) return notFound();
 
   const isArabic = lang === "ar";
@@ -18,3 +18,6 @@ export default function LangLayout({ children, params }) {
     </div>
   );
 }
+
+
+
