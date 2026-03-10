@@ -19,12 +19,14 @@ export async function generateMetadata({ params }) {
   const data = await getCachedPost(slug);
   if (!data?.post) return {}; 
 
+  // Safely extract all localized fields, including the new keywords array
   const post = {
     title: data.post.title?.[lang] || data.post.title?.en || "",
     seoTitle: data.post.seoTitle?.[lang] || data.post.seoTitle?.en || data.post.title?.en || "",
     metaDescription: data.post.metaDescription?.[lang] || data.post.metaDescription?.en || "",
     slug: data.post.slug?.[lang]?.current || data.post.slug?.en?.current || slug,
-    image: data.post.mainImage || "https://www.expatlifeinfo.com/default-og-image.jpg"
+    image: data.post.mainImage || "https://www.expatlifeinfo.com/default-og-image.jpg",
+    keywords: data.post.keywords?.[lang] || data.post.keywords?.en || [] // <--- ADDED KEYWORDS HERE
   };
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.expatlifeinfo.com";
@@ -33,6 +35,7 @@ export async function generateMetadata({ params }) {
     metadataBase: new URL(baseUrl),
     title: post.seoTitle,
     description: post.metaDescription,
+    keywords: post.keywords, // <--- INJECTED INTO NEXT.JS METADATA
     alternates: {
       canonical: `/${lang}/blog/${post.slug}`,
       languages: {
@@ -81,6 +84,7 @@ const BlogDetailsPage = async ({ params }) => {
     seoTitle: data.post.seoTitle?.[lang] || data.post.seoTitle?.en || "",
     metaDescription: data.post.metaDescription?.[lang] || data.post.metaDescription?.en || "",
     slug: data.post.slug?.[lang]?.current || data.post.slug?.en?.current || slug,
+    keywords: data.post.keywords?.[lang] || data.post.keywords?.en || [], // <--- ADDED KEYWORDS HERE
   };
 
   // ------------------------
@@ -116,6 +120,7 @@ const BlogDetailsPage = async ({ params }) => {
       '@type': 'WebPage',
       '@id': `${baseUrl}/${lang}/blog/${post.slug}`,
     },
+    keywords: post.keywords.join(', '), // <--- ADDED TO JSON-LD (Requires a comma-separated string)
   };
 
   return (

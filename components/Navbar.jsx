@@ -143,26 +143,30 @@ export default function Navbar({ lang, tickerItems = [] }) {
         </div>
 
         {/* Brand row */}
-        <div className="grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center px-5 lg:px-8 h-[64px] lg:h-[72px] border-b-[1.5px] border-[#0d1a0f]/10 gap-4">
+        {/* Increased row height on desktop to accommodate bigger logo */}
+        <div className="grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center px-5 lg:px-8 h-[64px] lg:h-[80px] border-b-[1.5px] border-[#0d1a0f]/10 gap-4">
           <div className="flex items-center">
             <button className="w-[36px] h-[36px] flex lg:hidden items-center justify-center bg-transparent border-[1.5px] border-[#0d1a0f]/20 text-[#0d1a0f] cursor-pointer shrink-0" onClick={() => setMobileOpen(true)}>
               <svg fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24" className="w-4 h-4"><line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="16" y2="12" /><line x1="4" y1="17" x2="20" y2="17" /></svg>
             </button>
           </div>
 
-          {/* 🌟 REPLACED: Updated Link component with Next.js Image */}
-          <Link href={`/${lang}`} className="flex items-center justify-self-center outline-none">
-            {/* The relative container allows Next.js 'fill' strategy.
-                Adjust the clamp values if your logo is square.
-                Currently optimized for a wide, premium logo. */}
-            <div className="relative h-[clamp(32px,4vw,40px)] md:h-[48px] aspect-[4/1] overflow-hidden">
+          {/* 🌟 REPLACED: Updated Link component with Next.js Image and increased size */}
+          <Link href={`/`} className="flex items-center justify-self-center outline-none">
+            {/* 🌟 LOGO SIZE INCREASED HERE
+                Old height classes: h-[clamp(32px,4vw,40px)] md:h-[48px]
+                New height classes: h-[clamp(40px,5vw,55px)] md:h-[65px]
+                Optimized sizes prop for larger rendering.
+            */}
+            <div className="relative h-[clamp(40px,5vw,55px)] md:h-[65px] aspect-[4/1] overflow-hidden">
                 <Image 
-                  src="/Logo.png" // User-specified path
+                  src="/logo.png" // User-specified path
                   alt={`${t.brandSaudi} ${t.brandExpat}`} // Existing translation strings for alternative text
                   fill
                   className="object-contain" // Ensures the logo isn't cropped or stretched
                   priority // Tells Next.js to load this instantly for SEO
-                  sizes="(max-width: 768px) 160px, 192px" // Optimization hint for Next.js
+                  // 🌟 Updated optimization hints for larger logo widths (assuming ~4:1 ratio)
+                  sizes="(max-width: 768px) 220px, 260px" 
                 />
             </div>
           </Link>
@@ -218,10 +222,11 @@ export default function Navbar({ lang, tickerItems = [] }) {
       <div className={`fixed inset-0 z-[200] grid grid-cols-[3fr_2fr] ${mobileOpen ? 'pointer-events-auto visible' : 'pointer-events-none invisible transition-[visibility] duration-0 delay-[450ms]'}`}>
         <div className={`bg-[#0d1a0f] flex flex-col overflow-hidden transition-transform duration-[440ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${mobileOpen ? 'translate-x-0' : (isArabic ? 'translate-x-full' : '-translate-x-full')}`}>
           <div className="flex items-center justify-between px-4 h-[56px] border-b border-[#f5f0e8]/10 shrink-0">
-            {/* 🌟 Updated Mobile Branding Link to use Logo Image */}
-            <Link href={`/${lang}`} className="relative h-[32px] aspect-[4/1] outline-none">
+            {/* 🌟 Updated Mobile Branding Link to use Logo Image and increased size */}
+            {/* 🌟 LOGO SIZE INCREASED HERE: Changed h-[32px] to h-[45px] */}
+            <Link href={`/`} className="relative h-[45px] aspect-[4/1] outline-none">
               <Image 
-                  src="/assets/images/logo.png" 
+                  src="/logo.png" 
                   alt={`${t.brandSaudi} ${t.brandExpat}`}
                   fill
                   className="object-contain"

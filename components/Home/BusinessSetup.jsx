@@ -70,7 +70,7 @@ export default function BusinessSetup({ lang, businessPosts }) {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-8 gap-y-10 sm:gap-y-14">
             {businessPosts.map((post) => (
               <article key={post._id} className="group flex flex-col h-full">
-                <Link href={`/${lang}/news/${post.slug}`} className="flex flex-col h-full outline-none">
+                <Link href={`/${lang}/blog/${post.slug}`} className="flex flex-col h-full outline-none">
                   
                   {/* Image (Rounded, borderless, optimized Next Image) */}
                   <div className="relative w-full aspect-[16/11] overflow-hidden bg-[#0d1a0f] mb-4 sm:mb-5 rounded-xl">

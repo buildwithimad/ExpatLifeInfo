@@ -104,6 +104,9 @@ export default defineType({
       to: [{ type: "category" }]
     }),
 
+    // =========================
+    // ADDITIONAL FIELDS
+    // =========================
     defineField({
       name: "author",
       title: "Author",
@@ -111,9 +114,6 @@ export default defineType({
       to: [{ type: "author" }]
     }),
 
-    // =========================
-    // ADDITIONAL FIELDS
-    // =========================
     defineField({
       name: "readTime",
       title: "Read Time (minutes)",
@@ -185,11 +185,27 @@ export default defineType({
       ]
     }),
 
+    // 🌟 UPDATED: Keywords is now bilingual
     defineField({
       name: "keywords",
       title: "SEO Keywords",
-      type: "array",
-      of: [{ type: "string" }]
+      type: "object",
+      fields: [
+        { 
+          name: "en", 
+          title: "English Keywords", 
+          type: "array", 
+          of: [{ type: "string" }],
+          description: "Add English SEO keywords"
+        },
+        { 
+          name: "ar", 
+          title: "Arabic Keywords", 
+          type: "array", 
+          of: [{ type: "string" }],
+          description: "Add Arabic SEO keywords"
+        }
+      ]
     })
 
   ],
