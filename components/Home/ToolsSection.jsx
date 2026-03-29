@@ -49,11 +49,13 @@ export default function ToolsSection({ lang }) {
       name: isArabic ? "أسعار الصرف" : "Exchange Rates",
       description: isArabic ? "تحويل العملات المباشر" : "Live currency conversion",
       icon: DollarSign,
-      status: "coming-soon",
-      href: null,
+      status: "available",
+      href: `/${lang}/exchange-rates`,
       color: {
         bg: "bg-emerald-50",
         text: "text-emerald-600",
+        hoverBg: "group-hover:bg-emerald-500",
+        hoverText: "group-hover:text-white"
       }
     },
     {
