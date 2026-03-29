@@ -2,7 +2,12 @@ import GoldDashboard from "@/components/Gold/GoldDashboard";
 
 async function getData() {
   // Use absolute URL for server-side fetch in Next.js
-  const apiUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+  const apiUrl =
+  process.env.NODE_ENV === "development"
+    ? process.env.NEXT_PUBLIC_SITE_URL_DEV
+    : process.env.NEXT_PUBLIC_SITE_URL;
+    
   const res = await fetch(`${apiUrl}/api/gold`, {
     next: { revalidate: 300 },
   });
