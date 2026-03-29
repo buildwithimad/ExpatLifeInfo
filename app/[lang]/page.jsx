@@ -9,6 +9,7 @@ import JobsSalaries from "@/components/Home/JobsSalaries"
 import DrivingTraffic from "@/components/Home/DrivingTraffic"
 import BusinessSetup from "@/components/Home/BusinessSetup"
 import CategoryExplore from "@/components/Home/CategoryExploral"
+import ToolsSection from "@/components/Home/ToolsSection"
 
 import { getLatestPosts, getPopularGuides, getAllPostsByLang } from "@/services/postServices"
 import { getCategories } from "@/services/categoriesServices"
@@ -137,6 +138,7 @@ export default async function HomePage({ params }) {
 
       <div className="overflow-x-hidden">
         <LatestNewsSlider lang={lang} latestPosts={latestPosts} />
+        <ToolsSection lang={lang} />
         <PopularGuides lang={lang} popularGuides={popularGuides} />
         <CategoryExplore lang={lang} categories={categories} />
         <CategoriesGrid lang={lang} categories={categories} />
