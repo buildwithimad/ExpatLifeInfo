@@ -63,11 +63,13 @@ export default function ToolsSection({ lang }) {
       name: isArabic ? "أوقات الصلاة" : "Prayer Times",
       description: isArabic ? "مواقيت الصلاة لمدن المملكة" : "Accurate Saudi prayer times",
       icon: Clock,
-      status: "coming-soon",
-      href: null,
+      status: "available",
+      href: `/${lang}/prayer-times/Riyadh`,
       color: {
         bg: "bg-blue-50",
         text: "text-blue-600",
+        hoverBg: "group-hover:bg-blue-500",
+        hoverText: "group-hover:text-white"
       }
     },
     {
